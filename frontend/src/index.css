@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@font-face {
+  font-family: "HornbillTitle";
+  src: url("/fonts/hornbill/HornbillTrial-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-montserrat: var(--font-montserrat), sans-serif;
+  --font-projectTitle: "HornbillTitle", serif;
+
+  --color-lace: #eee4da;
+  --color-sand: #d8c4ac;
+  --color-dustpink: #c8a49f;
+  --color-burgundy: #4d0e13;
+}

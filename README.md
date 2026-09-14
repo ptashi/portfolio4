@@ -4,4 +4,4 @@
 
 - React
 - Flask
-- Supabase
+- Supabase (for the contact form)
