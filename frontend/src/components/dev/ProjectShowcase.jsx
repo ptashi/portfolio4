@@ -1,19 +1,34 @@
-
-import { Link } from "react-router-dom"
-import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 export default function ProjectCard({ projects }) {
-    const [selectedProject, setSelectedProject] = useState(0)
+    const [selectedProject, setSelectedProject] = useState(0);
     const containerRef = useRef(null);
-    // const itemHeight = 96;
+    const animationFrameRef = useRef(null);
 
-    // function handleScroll() {
-    //     const container = containerRef.current;
-    //     if (!container) return;
-    //     const index = Math.round(container.scrollTop / itemHeight);
-    //     setSelectedProject(index);
-    // }
+    function handleScroll() {
+        if (animationFrameRef.current) return;
 
+        animationFrameRef.current = requestAnimationFrame(() => {
+            animationFrameRef.current = null;
+            const container = containerRef.current;
+            if (!container) return;
+
+            const containerCenter = container.getBoundingClientRect().top + container.clientHeight / 2;
+            const closestIndex = [...container.children].reduce(
+                (closest, child, index) => {
+                    const childRect = child.getBoundingClientRect();
+                    const distance = Math.abs(childRect.top + childRect.height / 2 - containerCenter);
+                    return distance < closest.distance ? { index, distance } : closest;
+                },
+                { index: 0, distance: Infinity },
+            ).index;
+
+            setSelectedProject((currentIndex) => (currentIndex === closestIndex ? currentIndex : closestIndex));
+        });
+    }
+
+    useEffect(() => () => cancelAnimationFrame(animationFrameRef.current), []);
 
     const project = projects[selectedProject];
 
@@ -34,11 +49,11 @@ export default function ProjectCard({ projects }) {
                 <div className="flex-1 flex justify-between h-10 rounded-b-xl relative ">
                     <div className="text-white text-2xl font-projectTitle">{project.projectName}</div>
                     <Link
-                    to={project.projectGithub}
-                    target="_blank"
-                    className="text-sand text-xs border-b border-sand/40 pb-0.5 hover:border-sand hover:text-dustpink transition-colors"
+                        to={project.projectGithub}
+                        target="_blank"
+                        className="text-sand text-xs border-b border-sand/40 pb-0.5 hover:border-sand hover:text-dustpink transition-colors"
                     >
-                    View on Github →
+                        View on Github →
                     </Link>
                 </div>
                 <div className="mx-auto mt-4 w-2/3 h-6 rounded-full bg-black/30 blur-md" />
@@ -46,7 +61,7 @@ export default function ProjectCard({ projects }) {
 
             <div
                 ref={containerRef}
-                // onScroll={handleScroll}
+                onScroll={handleScroll}
                 className="projectNames flex-1 min-w-[350px] max-w-[500px] h-[400px] overflow-y-auto rounded-4xl snap-y snap-mandatory"
                 style={{ paddingBlock: "168px" }}
             >
@@ -57,9 +72,7 @@ export default function ProjectCard({ projects }) {
                     >
                         <span
                             className={`transition-all duration-200 ${
-                                i === selectedProject
-                                    ? "text-7xl text-white"
-                                    : "text-4xl text-white/35"
+                                i === selectedProject ? "text-7xl text-white" : "text-4xl text-white/35"
                             }`}
                         >
                             {project.projectName}
@@ -67,8 +80,6 @@ export default function ProjectCard({ projects }) {
                     </div>
                 ))}
             </div>
-
         </section>
-
-    )
+    );
 }
