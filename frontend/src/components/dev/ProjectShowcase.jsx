@@ -1,26 +1,19 @@
 
 import { Link } from "react-router-dom"
-import { ArrowRight } from "lucide-react";
 import { useState, useRef } from "react";
 
 export default function ProjectCard({ projects }) {
     const [selectedProject, setSelectedProject] = useState(0)
     const containerRef = useRef(null);
-    const itemHeight = 96;
+    // const itemHeight = 96;
 
-    function handleScroll() {
-        const container = containerRef.current;
-        if (!container) return;
-        const index = Math.round(container.scrollTop / itemHeight);
-        setSelectedProject(index);
-    }
+    // function handleScroll() {
+    //     const container = containerRef.current;
+    //     if (!container) return;
+    //     const index = Math.round(container.scrollTop / itemHeight);
+    //     setSelectedProject(index);
+    // }
 
-    function scrollToProject(i) {
-        containerRef.current?.scrollTo({
-            top: i * itemHeight,
-            behavior: "smooth"
-        })
-    }
 
     const project = projects[selectedProject];
 
@@ -53,14 +46,13 @@ export default function ProjectCard({ projects }) {
 
             <div
                 ref={containerRef}
-                onScroll={handleScroll}
+                // onScroll={handleScroll}
                 className="projectNames flex-1 min-w-[350px] max-w-[500px] h-[400px] overflow-y-auto rounded-4xl snap-y snap-mandatory"
                 style={{ paddingBlock: "168px" }}
             >
                 {projects.map((project, i) => (
-                    <button
+                    <div
                         key={project.projectName}
-                        onClick={() => scrollToProject(i)}
                         className="snap-center w-full text-left py-4 cursor-pointer font-projectTitle text-white border-b border-sand/40 py-10"
                     >
                         <span
@@ -72,7 +64,7 @@ export default function ProjectCard({ projects }) {
                         >
                             {project.projectName}
                         </span>
-                    </button>
+                    </div>
                 ))}
             </div>
 

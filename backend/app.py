@@ -16,5 +16,9 @@ def dev():
 def actor():
     return 'Actor Page'
 
+@app.route('/contact')
+def actor():
+    return 'Contact Page'
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
