@@ -17,7 +17,7 @@ def actor():
     return 'Actor Page'
 
 @app.route('/contact')
-def actor():
+def contact():
     return 'Contact Page'
 
 if __name__ == "__main__":
