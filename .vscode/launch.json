@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Backend: Flask",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "flask",
+            "args": ["--app", "app", "run", "--debug", "--port", "5000"],
+            "cwd": "${workspaceFolder}/backend",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "subProcess": true
+        },
+        {
+            "name": "Frontend: Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://127.0.0.1:5173/dev",
+            "webRoot": "${workspaceFolder}/frontend/src",
+            "preLaunchTask": "frontend:dev"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full stack",
+            "configurations": ["Backend: Flask", "Frontend: Chrome"],
+            "stopAll": true
+        }
+    ]
+}
