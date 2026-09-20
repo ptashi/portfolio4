@@ -4,31 +4,24 @@ import { useEffect, useRef, useState } from "react";
 export default function ProjectCard({ projects }) {
     const [selectedProject, setSelectedProject] = useState(0);
     const containerRef = useRef(null);
-    const animationFrameRef = useRef(null);
 
-    function handleScroll() {
-        if (animationFrameRef.current) return;
+    // Highlight whichever item is crossing the container's center line, letting
+    // native CSS scroll-snap handle the actual scrolling/snapping.
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
 
-        animationFrameRef.current = requestAnimationFrame(() => {
-            animationFrameRef.current = null;
-            const container = containerRef.current;
-            if (!container) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const centered = entries.find((entry) => entry.isIntersecting);
+                if (centered) setSelectedProject(Number(centered.target.dataset.index));
+            },
+            { root: container, rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+        );
 
-            const containerCenter = container.getBoundingClientRect().top + container.clientHeight / 2;
-            const closestIndex = [...container.children].reduce(
-                (closest, child, index) => {
-                    const childRect = child.getBoundingClientRect();
-                    const distance = Math.abs(childRect.top + childRect.height / 2 - containerCenter);
-                    return distance < closest.distance ? { index, distance } : closest;
-                },
-                { index: 0, distance: Infinity },
-            ).index;
-
-            setSelectedProject((currentIndex) => (currentIndex === closestIndex ? currentIndex : closestIndex));
-        });
-    }
-
-    useEffect(() => () => cancelAnimationFrame(animationFrameRef.current), []);
+        container.querySelectorAll("[data-index]").forEach((el) => observer.observe(el));
+        return () => observer.disconnect();
+    }, [projects]);
 
     const project = projects[selectedProject];
 
@@ -61,18 +54,18 @@ export default function ProjectCard({ projects }) {
 
             <div
                 ref={containerRef}
-                onScroll={handleScroll}
-                className="projectNames flex-1 min-w-[350px] max-w-[500px] h-[400px] overflow-y-auto rounded-4xl snap-y snap-mandatory"
+                className="projectNames flex-1 min-w-[350px] max-w-[500px] h-[400px] overflow-y-auto rounded-4xl overscroll-y-contain"
                 style={{ paddingBlock: "168px" }}
             >
                 {projects.map((project, i) => (
                     <div
                         key={project.projectName}
-                        className="snap-center w-full text-left py-4 cursor-pointer font-projectTitle text-white border-b border-sand/40 py-10"
+                        data-index={i}
+                        className="w-full h-32 flex items-center text-left cursor-pointer font-projectTitle text-white border-b border-sand/40"
                     >
                         <span
-                            className={`transition-all duration-200 ${
-                                i === selectedProject ? "text-7xl text-white" : "text-4xl text-white/35"
+                            className={`text-4xl origin-left transition-transform duration-200 ${
+                                i === selectedProject ? "scale-150 text-white" : "scale-100 text-white/35"
                             }`}
                         >
                             {project.projectName}
