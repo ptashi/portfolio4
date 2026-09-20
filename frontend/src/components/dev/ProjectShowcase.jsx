@@ -43,7 +43,7 @@ export default function ProjectCard({ projects }) {
                         muted
                         loop
                         playsInline
-                        className="w-140 h-full object-cover"
+                        className="w-full h-full object-cover"
                     />
                 </div>
                 <div className="flex-1 flex justify-between h-10 rounded-b-xl relative ">
