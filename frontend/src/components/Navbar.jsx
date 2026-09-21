@@ -19,7 +19,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className="flex sticky top-0 items-center justify-between p-8 h-15 min-w-screen bg-black text-white z-10">
+        <div className="flex absolute top-0 items-center justify-between p-8 h-15 min-w-screen bg-black text-white z-10">
 
         <div className="flex gap-10 justify-center">
             <div className="navListName hover:cursor-pointer hover:text-dustpink">
