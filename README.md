@@ -10,7 +10,7 @@ Features to add:
 
 - [x] set up routing for all pages
 - [x] about me secton for dev page
-      = [x] project section for dev page
+  - [x] project section for dev page
 - [] about me secton for act page
 - [x] dynamic footer for dev/act pages
   - Dynamic as in paramaterized, act page does not have all links, but dev does
