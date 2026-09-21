@@ -5,8 +5,8 @@ app = Flask(__name__)
 CORS(app) #allows requests from the React server
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def home():
+    return "Home Page"
 
 @app.route('/dev')
 def dev():

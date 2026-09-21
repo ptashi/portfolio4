@@ -12,6 +12,8 @@ export default function Navbar() {
         roleTitle = "Developer"
     } else if (pathname === "/contact") {
         roleTitle = "Contact Me"
+    } else if (pathname === "/") {
+        roleTitle = "Home Page"
     } else {
         console.log("Something went wrong with fetching path name.");
     }
