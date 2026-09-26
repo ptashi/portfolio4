@@ -8,12 +8,15 @@ export default function InteractiveHeart({ role }) {
 
     const handleMouseMove = (event) => {
         const rect = event.target.getBoundingClientRect();
-        lastMoveRef.current = Date.now()
+        lastMoveRef.current = Date.now() // last moust movement timestamp, re-renders when it changes
+
+        // converts window coordss to elemtn coords by subtracting elements top-left corner ??
         setMousePosition({
             x: event.clientX - rect.left,
             y: event.clientY - rect.top,
         })
 
+        // adding new point to trail
         setTrail((prevTrail) => {
             const maxHeart = 25
             const newTrail= [
@@ -22,7 +25,7 @@ export default function InteractiveHeart({ role }) {
             ]
 
             if (newTrail.length > maxHeart) {
-                newTrail.shift() // removes first elemnt of array
+                newTrail.shift() // removes first element of array so the array doesn't grow endlessly
             }
             return newTrail;
         })
@@ -31,15 +34,15 @@ export default function InteractiveHeart({ role }) {
 
     const drawHeart = (ctx, x, y, size, color) => {
 
-        ctx.save(); // save the frame in time
-        ctx.translate(x,y) 
+        ctx.save(); // save current canvas settings (color, position, etc.)
+        ctx.translate(x,y) // move the canvas origin to (x, y)
         ctx.fillStyle = color;
 
         ctx.beginPath()
         ctx.moveTo(0, size * 0.3)
 
         // right lobe from bottom
-        ctx.bezierCurveTo(
+        ctx.bezierCurveTo( // cp1x, cp1y, cp2x, cp2y, endX, endY
             0,
             0,
             size,
@@ -59,19 +62,18 @@ export default function InteractiveHeart({ role }) {
 
         ctx.closePath()
         ctx.fill()
-        ctx.restore();
+        ctx.restore(); // restore settings save at top, which undoes the translate/fillstyle to start fresh
     }
     const draw = (ctx) => {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // wipe the canvas so old hearts dont stay on
         
 
         const DURATION = 300;
+        // drawing a new one after DURATION amount of time
         trail.forEach((point) => {
             const age = Date.now() - point.bornAt;
             if (age < DURATION) {
-                ctx.save();
                 drawHeart(ctx, point.x, point.y, 20, 'pink');
-                ctx.restore();
             }
         })
 
