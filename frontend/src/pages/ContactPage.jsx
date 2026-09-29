@@ -11,9 +11,9 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
-            <div className="contactRight flex-1 h-full flex flex-col justify-center p-20 rounded-xl">
-                <div className="title font-projectTitle text-md bg-white text-burgundy">
-                    Contact Form Goes here
+            <div className="contactRight flex-1 flex flex-col justify-center align-center h-100 w-100 p-20 rounded-xl bg-white text-burgundy">
+                <div className="title font-projectTitle text-md ">
+                    Contact Me
                 </div>
                 <input name="Name" required="true" type="text" className="br-2 text-md font-montserrat" placeholder="Type your full name"/>
                 <input name="Email" required="true" type="email" className="br-2 text-md font-montserrat" placeholder="Type your  email"/>
