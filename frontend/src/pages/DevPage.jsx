@@ -2,6 +2,7 @@ import ProjectShowcase from "../components/dev/ProjectShowcase";
 import projectData from "../data/projectData";
 import AboutMe from "../components/dev/AboutMe"
 import InteractiveHeart from "../components/InteractiveHeart";
+import Skills from "../components/dev/Skills";
 
 
 export default function DevPage() {
@@ -10,6 +11,7 @@ export default function DevPage() {
             <InteractiveHeart role="DEVELOPER"/>
             <AboutMe />
             <ProjectShowcase projects={projectData} />
+            <Skills />
         </div>
     );
 }

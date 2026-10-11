@@ -19,5 +19,5 @@ export default function Canvas({ draw, ...rest }) {
         return () => cancelAnimationFrame(animationFrameId);
     }, [draw]) // automatically calls this when component unmounts -> stops the animation loop
 
-    return <canvas ref={canvasRef} {...rest} />; // render the actual <canvas> element
+    return <canvas ref={canvasRef} {...rest} style={{ width: '100%', height: '100%', ...rest.style }} />; // render the actual <canvas> element
 }
