@@ -3,6 +3,7 @@ import projectData from "../data/projectData";
 import AboutMe from "../components/dev/AboutMe"
 import InteractiveHeart from "../components/InteractiveHeart";
 import Skills from "../components/dev/Skills";
+import ExtraInfo from "../components/dev/ExtraInfo"
 
 
 export default function DevPage() {
@@ -12,6 +13,7 @@ export default function DevPage() {
             <AboutMe />
             <ProjectShowcase projects={projectData} />
             <Skills />
+            <ExtraInfo />
         </div>
     );
 }
