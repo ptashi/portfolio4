@@ -11,7 +11,7 @@ export default function Navbar() {
     } else if (pathname === "/dev") {
         roleTitle = "Developer"
     } else if (pathname === "/contact") {
-        roleTitle = "Contact Me"
+        roleTitle = "Don't be a stranger"
     } else if (pathname === "/") {
         roleTitle = "Home Page"
     } else {
@@ -22,9 +22,9 @@ export default function Navbar() {
         <div className="flex absolute top-0 items-center justify-between p-8 h-15 min-w-screen bg-black text-white z-10">
 
         <div className="flex gap-10 justify-center">
-            <div className="navListName hover:cursor-pointer hover:text-dustpink">
+            <a href={"/"}className="navListName hover:cursor-pointer hover:text-dustpink">
             Pema Tashi
-            </div>
+            </a>
             <div className="navListPosition font-projectTitle text-xl">
             {roleTitle.toUpperCase()}
             </div>
