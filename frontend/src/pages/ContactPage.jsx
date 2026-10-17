@@ -8,7 +8,7 @@ export default function ContactPage() {
 
 
     return (
-        <div className="w-screen h-screen bg-sand flex mt-5">
+        <div className="w-screen h-screen bg-sand flex flex-wrap mt-5">
             <div className="contactLeft flex-1 h-full flex flex-col gap-10 justify-center p-20 ">
                 <div className="contactInfo font-montserrat h-auto bg-white rounded-xl">
                     <div className="text-2xl flex-1 pt-10 text-center text-burgundy">Contact Information</div>
