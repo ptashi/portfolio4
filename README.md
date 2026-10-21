@@ -15,8 +15,8 @@ Features to add:
 - [x] dynamic footer for dev/act pages
   - Dynamic as in paramaterized, act page does not have all links, but dev does
 - [x] created landing page
-- [] interactive landing section where little neon outline heart follow the cursor with a black bg
+- [x] interactive landing section where little neon outline heart follow the cursor with a black bg
   - made the black bg
-- [] contact page information
+- [x] contact page information
 - [] timeline section
--
+- [] need to make it phone-friendly

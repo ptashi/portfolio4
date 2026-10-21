@@ -30,10 +30,10 @@ export default function ExtraInfo() {
                 Extra
             </div>
             <div className="border-b-2 text-dustpink w-20 mb-10"></div>
-            <div className="container flex flex-col gap-20 ">
+            <div className="container flex flex-col gap-20 px-10">
                 {info.map((proj) => (
                     <div className="flex flex-wrap justify-between items-center">
-                        <img src={proj.src} alt={proj.title} className="w-140 h-95 rounded-2xl transform hover:scale-110 duration-300" />
+                        <img src={proj.src} alt={proj.title} className="w-140 h-95 rounded-2xl transform hover:scale-110 duration-300 sm:mb-10" />
                         <div className="flex flex-col justify-center items-start w-200">
                             <div className="infotitle text-sand text-2xl mb-5 pb-5 border-b-1">{proj.title}</div>
                             <div className="infoParagraph whitespace-pre-line text-l text-white font-light leading-8">{proj.info}</div>
